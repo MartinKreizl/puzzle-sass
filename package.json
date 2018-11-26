@@ -1,0 +1,22 @@
+{
+  "name": "puzzle-sass",
+  "version": "1.0.0",
+  "description": "Css builder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo $1",
+    "build": "node-sass entry.scss | postcss --no-map -u autoprefixer -o build/puzzle-css.css",
+    "build-specificity": "node-sass entry-specificity.scss | postcss --no-map -u autoprefixer -o build/puzzle-css.css"
+  },
+  "author": "kreizl@topefekt.com",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^9.3.1",
+    "node-sass": "^4.10.0",
+    "postcss-cli": "^6.0.1"
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%"
+  ]
+}
