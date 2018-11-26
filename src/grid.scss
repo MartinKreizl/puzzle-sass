@@ -5,7 +5,7 @@ Grid module
   $scale: nth($scales, $i);
   @media screen and (min-width: map_get($sizes, $scale)) {
     @for $column from 1 through $column_count {
-      .grid-col-#{$scale}-#{$i} {
+      .grid-col-#{$scale}-#{$column} {
         width: #{($column/ $column_count) * 100}#{"%"};
       }
     }
