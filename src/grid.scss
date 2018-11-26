@@ -1,0 +1,13 @@
+/*
+Grid module
+*/
+@for $i from 1 through length($scales) {
+  $scale: nth($scales, $i);
+  @media screen and (min-width: map_get($sizes, $scale)) {
+    @for $column from 1 through $column_count {
+      .grid-col-#{$scale}-#{$i} {
+        width: #{($column/ $column_count) * 100}#{"%"};
+      }
+    }
+  }
+}

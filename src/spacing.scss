@@ -1,0 +1,9 @@
+/**
+ * Spacing module
+*/
+@for $i from 1 through length($scales) {
+  $scale: nth($scales, $i);
+  .spacing-#{$scale} {padding: #{$spacing_scale_base * $i};}
+  .spacing-#{$scale}-top {padding-top: #{$spacing_scale_base * $i}}
+  .spacing-#{$scale}-bottom {padding-bottom: #{$spacing_scale_base * $i}}
+}
