@@ -1,5 +1,6 @@
 $sizes : (xs:0px, sm: 600px, md: 960px, lg: 1280px, xl:1920px); //values are starting values
 $scales: map-keys($sizes); //available scales. Will be generated across all classes
+$specificity_selector: ""; //shoul be defined in puzzle-sass-config
 
 //configuration variables
 $spacing_scale_base: 24px;
