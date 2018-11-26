@@ -3,7 +3,7 @@ This package provides composable (atomic) css classes with lowest CSS specificit
 You can configure whole stylesheet in **config.scss**. See modules & configuration section
 for more details. 
 
-# Build process
+## Build process
 ```
 npm run build
 ```
@@ -11,7 +11,7 @@ npm run build
 ## Configuration
 You can configure "global" or module based variables in configuration file.
 
-##Modules
+## Modules
 
 ### Spacing
 **CSS specificity = 010**. Adds padding on all sides, only top or only bottom
