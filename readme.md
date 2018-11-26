@@ -1,19 +1,19 @@
-#Puzzle sass
-This package provides composable (atomic) css classes with lowest CSS specificity as possible
+# Puzzle sass
+This package provides composable (atomic) css classes with lowest CSS specificity as possible.
 You can configure whole stylesheet in **config.scss**. See modules & configuration section
 for more details. 
 
-#Build process
+# Build process
 ```
 npm run build
 ```
 
-##Configuration
+## Configuration
 You can configure "global" or module based variables in configuration file.
 
 ##Modules
 
-###Spacing
+### Spacing
 **CSS specificity = 010**. Adds padding on all sides, only top or only bottom
 
 API:
@@ -31,7 +31,7 @@ $spacing_scale_base: 24px; //.spacing-xs {padding: 24px}, .spacing-sm {padding: 
 $spacing_scale_base: 16px; //.spacing-xs {padding: 16px}, .spacing-sm {padding: 32px} ... 
 ```
 
-###Typography
+### Typography
 **CSS specificity = 010**. Adds sizes, weights and gutters
 
 API:
@@ -44,4 +44,4 @@ API:
 Configuration:
 - $typography_color - Default color for .typography classes
 
-###Grid
+### Grid
