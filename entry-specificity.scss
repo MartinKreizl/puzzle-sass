@@ -1,3 +1,5 @@
+@import "config";
+
 #{$specificity_selector} {
   @import "entry";
 }
