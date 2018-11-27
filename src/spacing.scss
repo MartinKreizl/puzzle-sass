@@ -3,7 +3,11 @@
 */
 @for $i from 1 through length($scales) {
   $scale: nth($scales, $i);
-  .spacing-#{$scale} {padding: #{$spacing_scale_base * $i};}
-  .spacing-#{$scale}-top {padding-top: #{$spacing_scale_base * $i}}
-  .spacing-#{$scale}-bottom {padding-bottom: #{$spacing_scale_base * $i}}
+  $padding: $spacing_scale_base * $i;
+
+  .spacing-#{$scale} {padding: #{$padding};}
+  .spacing-#{$scale}-vertical {padding-top: #{$padding}; padding-bottom: #{$padding};}
+  .spacing-#{$scale}-horizontal {padding-left: #{$padding}; padding-right: #{$padding};}
+  .spacing-#{$scale}-top {padding-top: #{$padding}}
+  .spacing-#{$scale}-bottom {padding-bottom: #{$padding}}
 }
