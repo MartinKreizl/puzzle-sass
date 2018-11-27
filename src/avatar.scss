@@ -6,5 +6,5 @@
 @for $i from 1 through length($scales) {
   $scale: nth($scales, $i);
 
-  .avatar-#{$scale} {width: #{$avatar_scale_base * $i}; height: #{$avatar_scale_base * $i}};
+  .avatar-#{$scale} {width: #{$avatar_scale_base * $i}; height: #{$avatar_scale_base * $i}; background-color: currentColor;};
 }
