@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo $1",
-    "build": "node-sass entry.scss | postcss --no-map -u autoprefixer",
-    "build-specificity": "node-sass entry-specificity.scss | postcss --no-map -u autoprefixer"
+    "build:default": "node-sass entry.scss | postcss --no-map -u autoprefixer",
+    "build:specificity": "node-sass entry-specificity.scss | postcss --no-map -u autoprefixer"
   },
   "author": "kreizl@topefekt.com",
   "license": "ISC",
