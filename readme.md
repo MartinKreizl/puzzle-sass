@@ -1,47 +1,58 @@
 # Puzzle sass
-This package provides composable (atomic) css classes with lowest CSS specificity as possible.
-You can configure whole stylesheet in **config.scss**. See modules & configuration section
-for more details. 
-
-## Build process
-```
-npm run build
-```
+This package provides composable (atomic) css classes wich are grouped to related modules.
+We provide consistent APIs across the modules including "conditional parameters" which are awesome and handy for responsive designs.
+You can configure whole project from within one javascript file and use its power in your scss files.
 
 ## Configuration
-You can configure "global" or module based variables in configuration file.
+By default puzzle-sass searching for **puzzleSass.config.js** in working directory.
 
-## Modules
 
-### Spacing
-**CSS specificity = 010**. Adds padding on all sides, only top or only bottom
+## Terminology
+**Module** - Set of css classes which operates on related css properties eg. font, flex padding margin etc..
+So APIs are divided into modules.
+modules are prefixed with **mod-** keyword.
 
-API:
-- .spacing-{SCALE}
-- .spacing-{SCALE}-top
-- .spacing-{SCALE}-bottom
 
-Configuration:
-- $spacing_scale_base - Base unit which is multiply across available $sizes.
+**Submodule** - Targets on spacific css property. There is point where atomicity is created.
+```css
+.mod-flex-align /* Submodule of flex which target on align-content css property */
+.mod-flex-justify /* Submodule of flex which target on justify-content css property */
 
-Example:
-
-```scss
-$spacing_scale_base: 24px; //.spacing-xs {padding: 24px}, .spacing-sm {padding: 48px} ...
-$spacing_scale_base: 16px; //.spacing-xs {padding: 16px}, .spacing-sm {padding: 32px} ... 
+.mod-grid-container /* Submodule of grid which creates container */
+.grid-item /* Submodule of grid which creates item */
 ```
 
-### Typography
-**CSS specificity = 010**. Adds sizes, weights and gutters
+**Submodule params** - Are class names with module name prefix which acts as values for css properties.
 
-API:
-- .typography-size-{SIZE} - SIZE is value from enum(h1-h6, body1-body3)
-- .typography-weight-{WEIGHT} - WEIGHT is value within range 1-9
-- .typography-align-{ALIGN} - ALIGN is value from enum(left, center, right)
-- .typography-gutter
-- .typography
+```css
 
-Configuration:
-- $typography_color - Default color for .typography classes
+.mod-flex-align .flex-center /* Parameter of submodule flex-align which tells where to align items */
+.mod-flex-justify .flex-center /* Parameter of submodule flex-justify which tells where to justify content */
+```
 
-### Grid
+**Conditional params** - Are class names very similar to "submodule params" with one exception.
+They ends with breakpoint value.
+```
+.mod-flex-align .flex-center-md .flex-bottom-lg .flex-start-xl /* conditionaly pass parameters to flex-align css property*/
+```
+
+Rules of css class APIs
+1) Each module class name begins with **mod** followed by module name eg. .mod-flex, .mod-grid
+2) Each module namespace its arguments eg. .mod-grid-container .grid-align-top, .mod-flex-align .flex-center
+3) Each module supports breakpoints modificators (aka. conditional parameters) eg. .flex-center-xs .flex-top-md
+
+## Usage
+We can divide usage on two parts:
+1) class inheritance approach
+2) using sass functions approach (they are backed by javascript under the hood 👍👍)
+
+We can achive best usage comfort with combined together.
+
+## Usa case of "class inheritance approach"
+todo
+
+## Build process
+todo
+
+## Modules
+todo

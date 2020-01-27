@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo $1",
+    "compile": "node index.js",
     "build:default": "node-sass entry.scss | postcss --no-map -u autoprefixer",
     "build:specificity": "node-sass entry-specificity.scss | postcss --no-map -u autoprefixer"
   },
   "author": "kreizl@topefekt.com",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.9.0",
+    "@material-ui/styles": "^4.9.0",
+    "@material-ui/system": "^4.7.1",
     "autoprefixer": "^9.3.1",
     "node-sass": "^4.10.0",
     "postcss-cli": "^6.0.1"
