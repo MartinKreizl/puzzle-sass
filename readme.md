@@ -19,7 +19,7 @@ modules are prefixed with **mod-** keyword.
 .mod-flex-justify /* Submodule of flex which target on justify-content css property */
 
 .mod-grid-container /* Submodule of grid which creates container */
-.grid-item /* Submodule of grid which creates item */
+.mod-grid-item /* Submodule of grid which creates item */
 ```
 
 **Submodule params** - Are class names with module name prefix which acts as values for css properties.
@@ -32,7 +32,8 @@ modules are prefixed with **mod-** keyword.
 
 **Conditional params** - Are class names very similar to "submodule params" with one exception.
 They ends with breakpoint value.
-```
+
+```css
 .mod-flex-align .flex-center-md .flex-bottom-lg .flex-start-xl /* conditionaly pass parameters to flex-align css property*/
 ```
 
