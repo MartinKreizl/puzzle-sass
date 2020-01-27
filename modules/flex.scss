@@ -1,0 +1,88 @@
+@import "internals";
+$module: flex;
+
+@mixin flexModule($breakpoint: "") {
+  @if $breakpoint != "" {
+    $breakpoint: -#{$breakpoint};
+  }
+
+  &-direction {
+    display: flex;
+    .#{$module}-column#{$breakpoint} {
+      flex-direction: column;
+    }
+    .#{$module}-row#{$breakpoint} {
+      flex-direction: row;
+    }
+  }
+  &-wrap {
+    display: flex;
+    &.#{$module}-wrap#{$breakpoint} {
+      flex-wrap: wrap;
+    }
+    &.#{$module}-wrap-reverse#{$breakpoint} {
+      flex-wrap: wrap-reverse;
+    }
+  }
+  &-grow {
+    flex-grow: 1;
+  }
+  &-align {
+    display: flex;
+    &.#{$module}-align-start#{$breakpoint} {
+      align-items: flex-start;
+    }
+    &.#{$module}-align-center#{$breakpoint} {
+      align-items: flex-start;
+    }
+    &.#{$module}-align-end#{$breakpoint} {
+      align-items: flex-end;
+    }
+  }
+  &-justify {
+    display: flex;
+    &.#{$module}-justify-start#{$breakpoint} {
+      justify-content: flex-start;
+    }
+    &.#{$module}-justify-center#{$breakpoint} {
+      justify-content: center;
+    }
+    &.#{$module}-justify-end#{$breakpoint} {
+      justify-content: flex-end;
+    }
+    &.#{$module}-justify-between#{$breakpoint} {
+      justify-content: space-between;
+    }
+    &.#{$module}-justify-around#{$breakpoint} {
+      justify-content: space-around;
+    }
+  }
+  &-self {
+    &.#{$module}-self-start#{$breakpoint} {
+      align-self: flex-start;
+    }
+    &.#{$module}-self-center#{$breakpoint} {
+      align-self: center;
+    }
+    &.#{$module}-self-end#{$breakpoint} {
+      align-self: flex-end;
+    }
+    &.#{$module}-self-start#{$breakpoint} {
+      align-self: stretch;
+    }
+  }
+}
+
+/**
+ * Flex module
+*/
+
+.mod-#{$module} {
+  @include flexModule();
+
+  @each $scale, $size in $breakpoints {
+    @media screen and (min-width: $size#{"px"}) {
+      @include flexModule($scale);
+    }
+  }
+}

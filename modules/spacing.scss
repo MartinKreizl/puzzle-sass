@@ -1,0 +1,77 @@
+@import "internals";
+$module: spacing;
+$maxSpaces: 12;
+$spaceFactor: 1;
+
+@mixin spacingModule($breakpoint: "") {
+  @if $breakpoint != "" {
+    $breakpoint: -#{$breakpoint};
+  }
+
+  @for $count from 1 through $maxSpaces {
+    $space: spacing($spaceFactor * $count);
+
+    &.#{$module}-m-#{$count}#{$breakpoint} {
+      margin: $space;
+    }
+    &.#{$module}-mx-#{$count}#{$breakpoint} {
+      margin-left: $space;
+      margin-right: $space;
+    }
+    &.#{$module}-my-#{$count}#{$breakpoint} {
+      margin-top: $space;
+      margin-bottom: $space;
+    }
+    &.#{$module}-mt-#{$count}#{$breakpoint} {
+      margin-top: $space;
+    }
+    &.#{$module}-mr-#{$count}#{$breakpoint} {
+      margin-right: $space;
+    }
+    &.#{$module}-mb-#{$count}#{$breakpoint} {
+      margin-bottom: $space;
+    }
+    &.#{$module}-ml-#{$count}#{$breakpoint} {
+      margin-left: $space;
+    }
+    &.#{$module}-p-#{$count}#{$breakpoint} {
+      padding: $space;
+    }
+    &.#{$module}-px-#{$count}#{$breakpoint} {
+      padding-left: $space;
+      padding-right: $space;
+    }
+    &.#{$module}-py-#{$count}#{$breakpoint} {
+      padding-top: $space;
+      padding-bottom: $space;
+    }
+    &.#{$module}-pt-#{$count}#{$breakpoint} {
+      padding-top: $space;
+    }
+    &.#{$module}-pr-#{$count}#{$breakpoint} {
+      padding-right: $space;
+    }
+    &.#{$module}-pb-#{$count}#{$breakpoint} {
+      padding-bottom: $space;
+    }
+    &.#{$module}-pl-#{$count}#{$breakpoint} {
+      padding-left: $space;
+    }
+  }
+}
+
+/**
+ * Spacing module
+ * --maxSpaces #{$maxSpaces}
+ * --spaceFactor #{$spaceFactor} (#{spacing($spaceFactor)})
+*/
+
+.mod-#{$module} {
+  @include spacingModule();
+
+  @each $scale, $size in $breakpoints {
+    @media screen and (min-width: $size#{"px"}) {
+      @include spacingModule($scale);
+    }
+  }
+}

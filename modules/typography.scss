@@ -1,0 +1,62 @@
+@import "internals";
+$module: typography;
+
+@mixin typographyModule($breakpoint: "") {
+  @if $breakpoint != "" {
+    $breakpoint: -#{$breakpoint};
+  }
+
+  &-weight {
+    &.#{$module}-light#{$breakpoint}{
+      font-weight: typography("fontWeightLight");
+    }
+    &.#{$module}-regular#{$breakpoint}{
+      font-weight: typography("fontWeightRegular");
+    }
+    &.#{$module}-medium#{$breakpoint}{
+      font-weight: typography("fontWeightMedium");
+    }
+    &.#{$module}-bold#{$breakpoint}{
+      font-weight: typography("fontWeightBold");
+    }
+  }
+  &-align {
+    &.#{$module}-left#{$breakpoint}{
+      text-align: left;
+    }
+    &.#{$module}-center#{$breakpoint}{
+      text-align: center;
+    }
+    &.#{$module}-right#{$breakpoint}{
+      text-align: right;
+    }
+    &.#{$module}-justify#{$breakpoint}{
+      text-align: justify;
+    }
+  }
+}
+
+/**
+ * Typography module
+*/
+
+.mod-#{$module} {
+  @include typographyModule();
+
+  @each $scale, $size in $breakpoints {
+    @media screen and (min-width: $size#{"px"}) {
+      @include typographyModule($scale);
+    }
+  }
+}
+
+/** Typography sizes */
+.typography-size-h1 {font-size: 6rem}
+.typography-size-h2 {font-size: 3.75rem}
+.typography-size-h3 {font-size: 3rem}
+.typography-size-h4 {font-size: 2.125rem}
+.typography-size-h5 {font-size: 1.5rem}
+.typography-size-h6 {font-size: 1.25rem}
+.typography-size-body1 {font-size: 1rem}
+.typography-size-body2 {font-size: 0.875rem}
+.typography-size-body3 {font-size: 0.75rem}
