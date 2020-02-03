@@ -8,10 +8,10 @@ $module: flex;
 
   &-direction {
     display: flex;
-    .#{$module}-column#{$breakpoint} {
+    &.#{$module}-column#{$breakpoint} {
       flex-direction: column;
     }
-    .#{$module}-row#{$breakpoint} {
+    &.#{$module}-row#{$breakpoint} {
       flex-direction: row;
     }
   }
@@ -67,7 +67,7 @@ $module: flex;
     &.#{$module}-self-end#{$breakpoint} {
       align-self: flex-end;
     }
-    &.#{$module}-self-start#{$breakpoint} {
+    &.#{$module}-self-stretch#{$breakpoint} {
       align-self: stretch;
     }
   }
