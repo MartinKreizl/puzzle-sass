@@ -14,7 +14,6 @@
   "dependencies": {
     "@material-ui/core": "^4.9.0",
     "@material-ui/styles": "^4.9.0",
-    "@material-ui/system": "^4.7.1",
     "autoprefixer": "^9.3.1",
     "deepmerge": "^4.2.2",
     "node-sass": "^4.10.0",
