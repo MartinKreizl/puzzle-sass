@@ -1,0 +1,81 @@
+@import "internals";
+$module: grid;
+$columnCount: 12; //todo: config variable
+$gutterCount: 8; //todo: config variable
+
+@mixin gridModule($breakpoint: "") {
+  @if $breakpoint != "" {
+    $breakpoint: -#{$breakpoint};
+  }
+
+  &-container {
+    display: flex;
+    @extend .mod-flex-wrap.flex-wrap#{$breakpoint};
+
+    &.#{$module}-align-start#{$breakpoint} {
+      @extend .mod-flex-align.flex-align-start#{$breakpoint};
+    }
+    &.#{$module}-align-center#{$breakpoint} {
+      @extend .mod-flex-align.flex-align-center#{$breakpoint};
+    }
+    &.#{$module}-align-end#{$breakpoint} {
+      @extend .mod-flex-align.flex-align-end#{$breakpoint};
+    }
+    &.#{$module}-justify-start#{$breakpoint} {
+      @extend .mod-flex-justify.flex-justify-start#{$breakpoint};
+    }
+    &.#{$module}-justify-center#{$breakpoint} {
+      @extend .mod-flex-justify.flex-justify-center#{$breakpoint};
+    }
+    &.#{$module}-justify-between#{$breakpoint} {
+      @extend .mod-flex-justify.flex-justify-between#{$breakpoint};
+    }
+    &.#{$module}-justify-around#{$breakpoint} {
+      @extend .mod-flex-justify.flex-justify-around#{$breakpoint};
+    }
+    &.#{$module}-justify-end#{$breakpoint} {
+      @extend .mod-flex-justify.flex-justify-end#{$breakpoint};
+    }
+
+    @for $gutter from 1 through $gutterCount {
+      &.#{$module}-spacing-#{$gutter}#{$breakpoint} {
+        width: calc(100% + #{spacing($gutter)});
+        margin: spacing(-$gutter / 2);
+        > [class*="mod-grid-item"] {
+          padding: spacing($gutter);
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+  &-item {
+    &.#{$module}-align-start#{$breakpoint} {
+      @extend .mod-flex-self.flex-self-start#{$breakpoint};
+    }
+    &.#{$module}-align-center#{$breakpoint} {
+      @extend .mod-flex-self.flex-self-center#{$breakpoint};
+    }
+    &.#{$module}-align-end#{$breakpoint} {
+      @extend .mod-flex-self.flex-self-end#{$breakpoint};
+    }
+    &.#{$module}-align-stretch#{$breakpoint} {
+      @extend .mod-flex-self.flex-self-stretch#{$breakpoint};
+    }
+
+    @for $column from 1 through $columnCount {
+      &.#{$module}-#{$column}#{$breakpoint} {
+        width: #{($column/ $columnCount) * 100}#{"%"};
+      }
+    }
+  }
+}
+
+.mod-#{$module} {
+  @include gridModule();
+
+  @each $scale, $size in $breakpoints {
+    @media screen and (min-width: $size#{"px"}) {
+      @include gridModule($scale);
+    }
+  }
+}
