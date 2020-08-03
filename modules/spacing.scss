@@ -1,14 +1,15 @@
 @import "internals";
 $module: spacing;
-$maxSpaces: 12;
-$spaceFactor: 1;
+
+$maxSpaces: mod_spacing_config("maxSpaces");
+$spaceFactor: mod_spacing_config("spaceFactor");
 
 @mixin spacingModule($breakpoint: "") {
   @if $breakpoint != "" {
     $breakpoint: -#{$breakpoint};
   }
 
-  @for $count from 1 through $maxSpaces {
+  @for $count from 0 through $maxSpaces {
     $space: spacing($spaceFactor * $count);
 
     &.#{$module}-m-#{$count}#{$breakpoint} {
@@ -70,8 +71,15 @@ $spaceFactor: 1;
   @include spacingModule();
 
   @each $scale, $size in $breakpoints {
-    @media screen and (min-width: $size#{"px"}) {
-      @include spacingModule($scale);
+
+    @media #{breakpoints_up($scale)} {
+      @include spacingModule(#{$scale});
+    }
+    @media #{breakpoints_down($scale)} {
+      @include spacingModule(#{$scale}-down);
+    }
+    @media #{breakpoints_only($scale)} {
+      @include spacingModule(#{$scale}-only);
     }
   }
 }

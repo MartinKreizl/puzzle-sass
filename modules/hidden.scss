@@ -1,0 +1,32 @@
+@import "internals";
+$module: hidden;
+
+@mixin hiddenModule($breakpoint: "") {
+  @if $breakpoint != "" {
+    $breakpoint: -#{$breakpoint};
+  }
+
+  &-display#{$breakpoint} {
+    display: none;
+  }
+  &-visibility#{$breakpoint} {
+    visibility: hidden;
+  }
+}
+
+.mod-#{$module} {
+  @include hiddenModule();
+
+  @each $scale, $size in $breakpoints {
+
+    @media #{breakpoints_up($scale)} {
+      @include hiddenModule(#{$scale});
+    }
+    @media #{breakpoints_down($scale)} {
+      @include hiddenModule(#{$scale}-down);
+    }
+    @media #{breakpoints_only($scale)} {
+      @include hiddenModule(#{$scale}-only);
+    }
+  }
+}

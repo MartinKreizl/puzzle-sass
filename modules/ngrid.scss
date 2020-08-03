@@ -1,0 +1,56 @@
+$module: ngrid;
+$columnCount: mod_ngrid_config("columnCount"); //todo: config variable
+$rowCount: mod_ngrid_config("rowCount");
+
+@mixin ngridModule($breakpoint: "") {
+  @if $breakpoint != "" {
+    $breakpoint: -#{$breakpoint};
+  }
+
+  @for $column from 1 through $columnCount + 1 {
+    &-column-start {
+      &.#{$module}-column-start-#{$column}#{$breakpoint} {
+        grid-column-start: $column;
+      }
+    }
+    &-column-end {
+      &.#{$module}-column-end-#{$column}#{$breakpoint} {
+        grid-column-end: $column;
+      }
+      &.#{$module}-column-end-#{$column}-span#{$breakpoint} {
+        grid-column-end: $column span;
+      }
+    }
+  }
+
+  @for $row from 1 through $rowCount + 1 {
+    &-row-start {
+      &.#{$module}-row-start-#{$row}#{$breakpoint} {
+        grid-row-start: $row;
+      }
+    }
+    &-row-end {
+      &.#{$module}-row-end-#{$row}#{$breakpoint} {
+        grid-row-end: $row;
+      }
+    }
+  }
+
+}
+
+.mod-#{$module} {
+  @include ngridModule();
+
+  @each $scale, $size in $breakpoints {
+
+    @media #{breakpoints_up($scale)} {
+      @include ngridModule(#{$scale});
+    }
+    @media #{breakpoints_down($scale)} {
+      @include ngridModule(#{$scale}-down);
+    }
+    @media #{breakpoints_only($scale)} {
+      @include ngridModule(#{$scale}-only);
+    }
+  }
+}

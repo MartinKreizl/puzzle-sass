@@ -24,7 +24,7 @@ $module: flex;
       flex-wrap: wrap-reverse;
     }
   }
-  &-grow {
+  &-grow#{$breakpoint} {
     flex-grow: 1;
   }
   &-align {
@@ -83,8 +83,15 @@ $module: flex;
   @include flexModule();
 
   @each $scale, $size in $breakpoints {
-    @media screen and (min-width: $size#{"px"}) {
-      @include flexModule($scale);
+
+    @media #{breakpoints_up($scale)} {
+      @include flexModule(#{$scale});
+    }
+    @media #{breakpoints_down($scale)} {
+      @include flexModule(#{$scale}-down);
+    }
+    @media #{breakpoints_only($scale)} {
+      @include flexModule(#{$scale}-only);
     }
   }
 }

@@ -1,0 +1,17 @@
+$module: surface;
+
+@mixin surfaceModule() {
+  @each $surface, $color in getSurfaceList() {
+    &.#{$module}-#{$surface} {
+      $contrast: palette_getContrastText($color);
+      background: $color;
+      color: $contrast;
+      --#{$module}-color: #{$contrast};
+      --#{$module}-background: #{$color};
+    }
+  }
+}
+
+.mod-#{$module} {
+  @include surfaceModule();
+}

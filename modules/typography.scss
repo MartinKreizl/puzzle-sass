@@ -6,6 +6,47 @@ $module: typography;
     $breakpoint: -#{$breakpoint};
   }
 
+  &-size {
+    &.#{$module}-h1#{$breakpoint}{
+      @include getCssFromStrucure(typography("h1"));
+    }
+    &.#{$module}-h2#{$breakpoint}{
+      @include getCssFromStrucure(typography("h2"));
+    }
+    &.#{$module}-h3#{$breakpoint}{
+      @include getCssFromStrucure(typography("h3"));
+    }
+    &.#{$module}-h4#{$breakpoint}{
+      @include getCssFromStrucure(typography("h4"));
+    }
+    &.#{$module}-h5#{$breakpoint}{
+      @include getCssFromStrucure(typography("h5"));
+    }
+    &.#{$module}-h6#{$breakpoint}{
+      @include getCssFromStrucure(typography("h6"));
+    }
+    &.#{$module}-body1#{$breakpoint}{
+      @include getCssFromStrucure(typography("body1"));
+    }
+    &.#{$module}-body2#{$breakpoint}{
+      @include getCssFromStrucure(typography("body2"));
+    }
+    &.#{$module}-subtitle1#{$breakpoint}{
+      @include getCssFromStrucure(typography("subtitle1"));
+    }
+    &.#{$module}-subtitle2#{$breakpoint}{
+      @include getCssFromStrucure(typography("subtitle2"));
+    }
+    &.#{$module}-button#{$breakpoint}{
+      @include getCssFromStrucure(typography("button"));
+    }
+    &.#{$module}-caption#{$breakpoint}{
+      @include getCssFromStrucure(typography("caption"));
+    }
+    &.#{$module}-overline#{$breakpoint}{
+      @include getCssFromStrucure(typography("overline"));
+    }
+  }
   &-weight {
     &.#{$module}-light#{$breakpoint}{
       font-weight: typography("fontWeightLight");
@@ -34,73 +75,6 @@ $module: typography;
       text-align: justify;
     }
   }
-  &-size {
-    &.#{$module}-h1#{$breakpoint}{
-      font-size: typography("h1.fontSize");
-      line-height: typography("h1.lineHeight");
-      letter-spacing: typography("h1.letterSpacing");
-    }
-    &.#{$module}-h2#{$breakpoint}{
-      font-size: typography("h2.fontSize");
-      line-height: typography("h2.lineHeight");
-      letter-spacing: typography("h2.letterSpacing");
-    }
-    &.#{$module}-h3#{$breakpoint}{
-      font-size: typography("h3.fontSize");
-      line-height: typography("h3.lineHeight");
-      letter-spacing: typography("h3.letterSpacing");
-    }
-    &.#{$module}-h4#{$breakpoint}{
-      font-size: typography("h4.fontSize");
-      line-height: typography("h4.lineHeight");
-      letter-spacing: typography("h4.letterSpacing");
-    }
-    &.#{$module}-h5#{$breakpoint}{
-      font-size: typography("h5.fontSize");
-      line-height: typography("h5.lineHeight");
-      letter-spacing: typography("h5.letterSpacing");
-    }
-    &.#{$module}-h6#{$breakpoint}{
-      font-size: typography("h6.fontSize");
-      line-height: typography("h6.lineHeight");
-      letter-spacing: typography("h6.letterSpacing");
-    }
-    &.#{$module}-body1#{$breakpoint}{
-      font-size: typography("body1.fontSize");
-      line-height: typography("body1.lineHeight");
-      letter-spacing: typography("body1.letterSpacing");
-    }
-    &.#{$module}-body2#{$breakpoint}{
-      font-size: typography("body2.fontSize");
-      line-height: typography("body2.lineHeight");
-      letter-spacing: typography("body2.letterSpacing");
-    }
-    &.#{$module}-subtitle1#{$breakpoint}{
-      font-size: typography("subtitle1.fontSize");
-      line-height: typography("subtitle1.lineHeight");
-      letter-spacing: typography("subtitle1.letterSpacing");
-    }
-    &.#{$module}-subtitle2#{$breakpoint}{
-      font-size: typography("subtitle2.fontSize");
-      line-height: typography("subtitle2.lineHeight");
-      letter-spacing: typography("subtitle2.letterSpacing");
-    }
-    &.#{$module}-button#{$breakpoint}{
-      font-size: typography("button.fontSize");
-      line-height: typography("button.lineHeight");
-      letter-spacing: typography("button.letterSpacing");
-    }
-    &.#{$module}-caption#{$breakpoint}{
-      font-size: typography("caption.fontSize");
-      line-height: typography("caption.lineHeight");
-      letter-spacing: typography("caption.letterSpacing");
-    }
-    &.#{$module}-overline#{$breakpoint}{
-      font-size: typography("overline.fontSize");
-      line-height: typography("overline.lineHeight");
-      letter-spacing: typography("overline.letterSpacing");
-    }
-  }
 }
 
 /**
@@ -111,8 +85,14 @@ $module: typography;
   @include typographyModule();
 
   @each $scale, $size in $breakpoints {
-    @media screen and (min-width: $size#{"px"}) {
-      @include typographyModule($scale);
+    @media #{breakpoints_up($scale)} {
+      @include typographyModule(#{$scale});
+    }
+    @media #{breakpoints_down($scale)} {
+      @include typographyModule(#{$scale}-down);
+    }
+    @media #{breakpoints_only($scale)} {
+      @include typographyModule(#{$scale}-only);
     }
   }
 }

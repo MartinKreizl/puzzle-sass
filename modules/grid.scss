@@ -1,6 +1,6 @@
 @import "internals";
 $module: grid;
-$columnCount: 12; //todo: config variable
+$columnCount: mod_grid_config("columnCount"); //todo: config variable
 $gutterCount: 8; //todo: config variable
 
 @mixin gridModule($breakpoint: "") {
@@ -41,7 +41,7 @@ $gutterCount: 8; //todo: config variable
       &.#{$module}-spacing-#{$gutter}#{$breakpoint} {
         width: calc(100% + #{spacing($gutter)});
         margin: spacing(-$gutter / 2);
-        > [class*="mod-grid-item"] {
+        > * {
           padding: spacing($gutter);
           box-sizing: border-box;
         }
@@ -61,6 +61,9 @@ $gutterCount: 8; //todo: config variable
     &.#{$module}-align-stretch#{$breakpoint} {
       @extend .mod-flex-self.flex-self-stretch#{$breakpoint};
     }
+    &.#{$module}-auto#{$breakpoint} {
+      flex-grow: 1;
+    }
 
     @for $column from 1 through $columnCount {
       &.#{$module}-#{$column}#{$breakpoint} {
@@ -74,8 +77,15 @@ $gutterCount: 8; //todo: config variable
   @include gridModule();
 
   @each $scale, $size in $breakpoints {
-    @media screen and (min-width: $size#{"px"}) {
-      @include gridModule($scale);
+
+    @media #{breakpoints_up($scale)} {
+      @include gridModule(#{$scale});
+    }
+    @media #{breakpoints_down($scale)} {
+      @include gridModule(#{$scale}-down);
+    }
+    @media #{breakpoints_only($scale)} {
+      @include gridModule(#{$scale}-only);
     }
   }
 }
