@@ -1,6 +1,6 @@
 {
   "name": "@martinkreizl/puzzle-sass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Css builder",
   "repository": {
     "type": "git",
@@ -16,7 +16,9 @@
     "node-sass": "^4.10.0",
     "postcss": "^7.0.27"
   },
-  "bin": "./bin/index.js",
+  "bin": {
+    "puzzle-sass": "./bin/index.js"
+  },
   "browserslist": [
     "last 1 version",
     "> 1%"
