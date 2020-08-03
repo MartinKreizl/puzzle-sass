@@ -1,1 +1,7 @@
-$breakpoints: map-remove(breakpoints("values"), "xs"); //xs breakpoint is obsolete
+$breakpoints: breakpoints("values");
+
+@mixin getCssFromStrucure($structure) {
+  @each $key, $value in $structure {
+    #{camelToCss($key)}: $value;
+  }
+}
