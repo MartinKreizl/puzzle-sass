@@ -1,13 +1,10 @@
 {
-  "name": "puzzle-sass",
+  "name": "@martinkreizl/puzzle-sass",
   "version": "1.0.0",
   "description": "Css builder",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo $1",
-    "compile": "node index.js",
-    "build:default": "node-sass entry.scss | postcss --no-map -u autoprefixer",
-    "build:specificity": "node-sass entry-specificity.scss | postcss --no-map -u autoprefixer"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MartinKreizl/puzzle-sass.git"
   },
   "author": "kreizl@topefekt.com",
   "license": "ISC",
