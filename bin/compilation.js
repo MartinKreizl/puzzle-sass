@@ -1,4 +1,6 @@
 const sass = require("node-sass");
+const postcss = require("postcss");
+const autoprefixer = require("autoprefixer");
 const fs = require("fs");
 const {getDeepValue} = require("./helpers");
 
@@ -8,7 +10,10 @@ function compile(config) {
     sass.render({
         ...sassConfig,
         file: inputFile,
-        functions: createFunctionsFromTheme(config.theme),
+        functions: {
+            ...createFunctionsFromTheme(config.theme),
+            ...createFunctionsFromModules(config.modules),
+        },
     }, (error, result) => {
         //console.log("DEBUG", _debug);
 
@@ -17,7 +22,11 @@ function compile(config) {
             process.exit(1);
         }
 
-        fs.writeFileSync(outputFile, result.css);
+        postcss([autoprefixer()])
+            .process(result.css)
+            .then((result) => {
+                fs.writeFileSync(outputFile, result.css);
+            })
     });
 }
 
@@ -35,12 +44,20 @@ function createSassFunction(value) {
         if (typeof value === "function") {
             let args = [];
             for(let i = 0; i < sassArg.getLength(); i++) {
-                args.push(sassArg.getValue(i).getValue());
+                let arg = sassArg.getValue(i);
+
+
+                args.push(convertSassObjectToJs(arg));
             }
             result = value(...args); //call underlying javascript function with arguments
         } else {
-            let arg = sassArg.getValue(0).getValue(); //expected to be path.subpath...
-            result = getDeepValue(arg.toString(), value);
+            if (sassArg.getLength() === 0) { //get full structure
+                result = value;
+            } else {
+                let arg = sassArg.getValue(0).getValue(); //expected to be path.subpath...
+
+                result = getDeepValue(arg.toString(), value);
+            }
         }
 
         if (Array.isArray(result)) {
@@ -59,9 +76,26 @@ function createSassFunction(value) {
             });
 
             return map;
+        } else if (typeof result === "number"){
+            return new sass.types.Number(result);
         } else {
             return new sass.types.String(result.toString());
         }
+    }
+}
+
+function convertSassObjectToJs(sassObject) {
+    if (sassObject instanceof sass.types.List) {
+        let js = [];
+    } else if (sassObject instanceof sass.types.Map) {
+        let js = {};
+        for(let i = 0; i < sassObject.getLength(); i++) {
+            js[sassObject.getKey(i).getValue()] = sassObject.getValue(i).getValue();
+        }
+
+        return js;
+    } else {
+        return sassObject.getValue();
     }
 }
 
@@ -91,6 +125,16 @@ function createFunctionsFromTheme(theme) {
                 functions[getFunctionSignature(`${module}_${submodule}`)] = createSassFunction(theme[module][submodule])
             }
         }
+    }
+
+    return functions;
+}
+
+function createFunctionsFromModules(modules) {
+    let functions = {};
+
+    for(let module in modules) {
+        functions[getFunctionSignature(`mod_${module}_config`)] = createSassFunction(modules[module]);
     }
 
     return functions;
