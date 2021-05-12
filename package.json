@@ -14,7 +14,7 @@
     "autoprefixer": "^9.7.4",
     "deepmerge": "^4.2.2",
     "node-sass": "^4.10.0",
-    "postcss": "^7.0.27"
+    "postcss": "^8.2.10"
   },
   "bin": {
     "puzzle-sass": "./bin/index.js"
